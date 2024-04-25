@@ -41,14 +41,14 @@ jobs:
 
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USERNAME }}
-          key: ${{ secrets.EC2_PRIVATE_KEY }}
+          key: ${{secrets.EC2_PRIVATE_KEY}}
           script: | 
-            docker login -u '${{ secrets.DOCKER_USERNAME }}' -p '${{secrets.DOCKER_PASSWORD}}'
+            docker login -u '${{secrets.DOCKER_USERNAME}}' -p '${{secrets.DOCKER_PASSWORD}}'
             if docker ps --all | grep creditcardsfraud ; then
                docker stop creditcardsfraud
                docker rm creditcardsfraud
             fi
               
               
-            docker pull   docker pull ${{ secrets.DOCKER_USERNAME }}/jeralinfh/creditcardsfraud:v1
-            docker run -d --name credit-card -p 8000:8000 ${{ secrets.DOCKER_USERNAME  }}/jeralinfh/creditcardsfraud:v1
+            docker pull   docker pull ${{secrets.DOCKER_USERNAME}}/creditcardsfraud:v1
+            docker run -d --name credit-card -p 8000:8000 ${{secrets.DOCKER_USERNAME}}/creditcardsfraud:v1
