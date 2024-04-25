@@ -1,6 +1,6 @@
 name: CI model dockerhub
 
-# Trigger
+
 on:
   push:
     branches:
@@ -10,7 +10,7 @@ on:
     branches:
     - dev
 
-# Acciones
+
 jobs:
   build_docker_images:
     runs-on: ubuntu-latest
