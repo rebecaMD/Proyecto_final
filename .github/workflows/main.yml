@@ -44,9 +44,9 @@ jobs:
           key: ${{ secrets.EC2_PRIVATE_KEY }}
           script: | 
             docker login -u '${{ secrets.DOCKER_USERNAME }}' -p '${{ secrets.DOCKER_PASSWORD }}'
-            if docker ps --all | grep credit-card; then
-               docker stop credit-cancer
-               docker rm credit-cancer
+            if docker ps --all | grep creditcardsfraud ; then
+               docker stop creditcardsfraud
+               docker rm creditcardsfraud
             fi
               
               
