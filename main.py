@@ -1,5 +1,5 @@
 import pandas as pd
-from fastapi import FastAPI, HTTPException,status,Query
+from fastapi import FastAPI, HTTPException, status, Query
 from fastapi.responses import JSONResponse
 import joblib
 
@@ -8,10 +8,10 @@ app = FastAPI(
     version="0.1.0"
 )
 
-
 model = joblib.load("model/creditcard.pkl")
 
-@app.post("/api/v1/credit_card_fraud",tags=["Credit Card"])
+
+@app.post("/api/v1/credit_card_fraud", tags=["Credit Card"])
 async def predict_fraud(
         Time: float,
         V1: float,
@@ -82,9 +82,7 @@ async def predict_fraud(
         }
         df = pd.DataFrame(data)
 
-
         prediction = model.predict(df)
-
 
         return JSONResponse(
             content={"prediction": prediction[0]},
@@ -99,10 +97,7 @@ async def predict_fraud(
         )
 
 
-
-#--------------------------------------------------------------------------------
-
-
+# --------------------------------------------------------------------------------
 
 
 app = FastAPI(
@@ -110,8 +105,8 @@ app = FastAPI(
     version="0.1.0"
 )
 
-# Cargar el modelo entrenado
 model = joblib.load("model/creditcard.pkl")
+
 
 @app.get("/api/v1/credit_card_fraud", tags=["Credit Card"])
 async def predict_fraud(
@@ -184,18 +179,17 @@ async def predict_fraud(
         }
         df = pd.DataFrame(data)
 
-
         prediction = model.predict(df)
 
-        # Devolver la predicción como respuesta utilizando JSONResponse
+        
         return JSONResponse(
             content={"prediction": prediction[0]},
-            status_code= status.HTTP_200_OK
+            status_code=status.HTTP_200_OK
 
         )
 
     except Exception as e:
-        # En caso de errores, devolver un mensaje de error
+      
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail=f"Ocurrió un error durante la predicción: {str(e)}"

@@ -9,3 +9,4 @@ filelock~=3.13.1
 pandas~=2.2.1
 joblib~=1.4.0
 fastapi~=0.110.2
+uvicorn
