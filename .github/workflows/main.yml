@@ -32,7 +32,7 @@ jobs:
         run: docker push jeralinfh/creditcardsfraud:v1
 
       - name: Login into the server
-        run: echo '${{ secrets.DOCKER_PASSWORD }}' | docker login -u '${{ secrets.DOCKER_USERNAME }}' --password-stdin
+        run: echo '${{ secrets.DOCKER_PASSWORD}}' | docker login -u '${{ secrets.DOCKER_USERNAME }}' --password-stdin
 
       - name: Deploy to EC2
         uses: appleboy/ssh-action@master
@@ -43,7 +43,7 @@ jobs:
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_PRIVATE_KEY }}
           script: | 
-            docker login -u '${{ secrets.DOCKER_USERNAME }}' -p '${{ secrets.DOCKER_PASSWORD }}'
+            docker login -u '${{ secrets.DOCKER_USERNAME }}' -p '${{secrets.DOCKER_PASSWORD}}'
             if docker ps --all | grep creditcardsfraud ; then
                docker stop creditcardsfraud
                docker rm creditcardsfraud
@@ -51,4 +51,4 @@ jobs:
               
               
             docker pull   docker pull ${{ secrets.DOCKER_USERNAME }}/jeralinfh/creditcardsfraud:v1
-            docker run -d --name credit-card -p 8000:8000 ${{ secrets.DOCKER_USERNAME }}/jeralinfh/creditcardsfraud:v1
+            docker run -d --name credit-card -p 8000:8000 ${{ secrets.DOCKER_USERNAME  }}/jeralinfh/creditcardsfraud:v1
